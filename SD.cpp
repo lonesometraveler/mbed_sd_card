@@ -21,7 +21,7 @@ int SD::mount() {
     return fs.mount(&bd);
 }
 
-int SD::write(const char* filePath, uint8_t* data, size_t size, int length) {
+int SD::write(const char* filePath, void* data, size_t size, int length) {
     FILE* f = fopen(filePath, SD_WRITE);
     if (f == NULL) { return -1; }
 
@@ -30,7 +30,7 @@ int SD::write(const char* filePath, uint8_t* data, size_t size, int length) {
     return result;
 }
 
-int SD::append(const char* filePath, uint8_t* data, size_t size, int length) {
+int SD::append(const char* filePath, void* data, size_t size, int length) {
     FILE* f = fopen(filePath, SD_APPEND);
     if (f == NULL) { return -1; }
 
