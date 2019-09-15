@@ -70,3 +70,42 @@ int result = sd.append(FILE_PATH, buffer, sizeof buffer[0], length);
 ```c++
 int result = sd.read(FILE_PATH, address, buffer, sizeof buffer[0], length);
 ```
+
+## Example
+
+```c++
+#include "mbed.h"
+#include "SD.h"
+
+SD sd(MBED_CONF_SD_SPI_MOSI, MBED_CONF_SD_SPI_MISO, MBED_CONF_SD_SPI_CLK, MBED_CONF_SD_SPI_CS);
+const char* FILE_PATH = "/fs/text.txt";
+
+int main() {
+
+    sd.mount();
+
+    char* text1 = "The world is in my head. ";
+    char* text2 = "My body is in the world.";
+    char buffer[64];
+
+    int size = sd.write(FILE_PATH, text1, sizeof(char), strlen(text1));
+    size > 0 
+    	? printf("wrote %d chars\r\n", size)
+    	: printf("error\r\n");
+
+    size = sd.read(FILE_PATH, 0, buffer, sizeof(char), 64);
+    size > 0
+    	? printf("read: %s\r\n", buffer)
+    	: printf("error\r\n");
+
+    size = sd.append(FILE_PATH, text2, sizeof(char), strlen(text2));
+    size > 0 
+    	? printf("appended %d chars\r\n", size)
+    	: printf("error\r\n");
+
+    size = sd.read(FILE_PATH, 0, buffer, sizeof(char), 64);
+    size > 0
+    	? printf("read: %s\r\n", buffer)
+    	: printf("error\r\n");
+}
+```
