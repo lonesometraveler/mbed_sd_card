@@ -50,7 +50,7 @@ public:
      *
      * @return size or -1 for error
      */
-     int write(const char* filePath, uint8_t* data, size_t size, int length);
+     int write(const char* filePath, void* data, size_t size, int length);
 
      /**
      * @brief append data to an existing file.
@@ -62,7 +62,7 @@ public:
      *
      * @return size or -1 for error
      */
-     int append(const char* filePath, uint8_t* data, size_t size, int length);
+     int append(const char* filePath, void* data, size_t size, int length);
 
 	/**
      * @brief read a file from a specified address.
